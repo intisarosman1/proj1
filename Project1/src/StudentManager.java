@@ -20,6 +20,59 @@ public class StudentManager implements StudentManagerInterface {
         courseScanner.nextLine();
 
 
+        while (courseScanner.hasNextLine()) {
+            if(!courseScanner.nextLine().isEmpty()) {
+                courseCount++;
+            }
+        }
+        courseScanner.reset();
+        courseScanner.nextLine();
+        courseScanner.nextLine();
+
+        int index = 0;
+        int[] studentsEnrolled = new int[courses.length];
+        while (courseScanner.hasNextLine()) {
+            String line = courseScanner.nextLine();
+            if (!line.isEmpty()) {
+                courses[index] = line.substring(0, line.indexOf(","));
+                studentsEnrolled[index] = Integer.parseInt(line.substring(line.indexOf(",") + 1, line.length() - 1));
+                index++;
+            }
+        }
+        courseScanner.close();
+
+
+        courseScanner = new Scanner(new File("students.csv"));
+        students = new Student[courses.length][];
+        for (int i = 0; i < courses.length; i++) {
+            students[i] = new Student[studentsEnrolled[i]];
+        }
+        courseScanner.reset();
+        courseScanner.nextLine();
+
+        int courseIndex = 0;
+        int studentIndex = 0;
+        while (courseScanner.hasNextLine()) {
+            String line = courseScanner.nextLine();
+            if (!line.isEmpty()) {
+                Scanner scanner = new Scanner(line);
+                scanner.useDelimiter("\D");
+                String course = scanner.next();
+                for (int i = 0; i < courses.length; i++) {
+                    if (courses[i].equals(course)) {
+                        if (courseIndex != i) {
+                            courseIndex = i;
+                            studentIndex = 0;
+                        }
+                    }
+                }
+                Student student = new Student(scanner.next(), scanner.next(), scanner.next(),
+                        scanner.next(), scanner.next());
+                students[courseIndex][studentIndex] = student;
+                studentIndex++;
+            }
+        }
+        courseScanner.close();
 
     }
 
