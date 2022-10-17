@@ -19,7 +19,6 @@ public class StudentManager implements StudentManagerInterface {
         courses = new String[courseCount];
         courseScanner.nextLine();
 
-
         while (courseScanner.hasNextLine()) {
             if(!courseScanner.nextLine().isEmpty()) {
                 courseCount++;
@@ -56,7 +55,7 @@ public class StudentManager implements StudentManagerInterface {
             String line = courseScanner.nextLine();
             if (!line.isEmpty()) {
                 Scanner scanner = new Scanner(line);
-                scanner.useDelimiter("\D");
+                scanner.useDelimiter("\\D");
                 String course = scanner.next();
                 for (int i = 0; i < courses.length; i++) {
                     if (courses[i].equals(course)) {
@@ -74,6 +73,8 @@ public class StudentManager implements StudentManagerInterface {
         }
         courseScanner.close();
 
+
+
     }
 
     /**
@@ -83,7 +84,7 @@ public class StudentManager implements StudentManagerInterface {
      */
     @Override
     public int getCourseCount() {
-        return 0;
+        return courses.length;
     }
 
     /**
@@ -126,11 +127,11 @@ public class StudentManager implements StudentManagerInterface {
      */
     @Override
     public String getCourseName(int courseIndex) {
-        return null;
+        return courses[courseIndex];
     }
 
     /**
-     * Retrieves the student at the specifiec course and student index
+     * Retrieves the student at the specific course and student index
      *
      * @param courseIndex  course index
      * @param studentIndex student index
@@ -138,7 +139,7 @@ public class StudentManager implements StudentManagerInterface {
      */
     @Override
     public Student getStudent(int courseIndex, int studentIndex) {
-        return null;
+        return students[courseIndex][studentIndex];
     }
 
     /**
@@ -149,7 +150,7 @@ public class StudentManager implements StudentManagerInterface {
      */
     @Override
     public Student[] getStudents(int courseIndex) {
-        return new Student[0];
+        return students[courseIndex];
     }
 
     /**
@@ -162,4 +163,5 @@ public class StudentManager implements StudentManagerInterface {
     public int findStudentCourse(String id) {
         return 0;
     }
+
 }
