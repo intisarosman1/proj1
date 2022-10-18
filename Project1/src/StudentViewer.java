@@ -144,7 +144,7 @@ public class StudentViewer extends JFrame {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (index - 1 < studentManager.getStudentCount(dropdownList.getSelectedIndex())) {
+                if (index + 1 < studentManager.getStudentCount(dropdownList.getSelectedIndex())) {
                     index++;
                     Student student = studentManager.getStudent(dropdownList.getSelectedIndex(), index);
                     idField.setText(student.id());
